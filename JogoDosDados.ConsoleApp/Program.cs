@@ -18,108 +18,110 @@ class Program
 
         while (true)
         {
+            bool ehTurnoJogador = true;
+            bool jogoEstaEmAndamento = true;
             int posicaoJogador = 0;
             int posicaoComputador = 0;
-            bool jogoEstaEmAndamento = true;
+
 
             while (jogoEstaEmAndamento)
             {
-
                 Console.Clear();
-                System.Console.WriteLine("----------------------");
-                System.Console.WriteLine("JOGO DOS DADOS");
-                System.Console.WriteLine("----------------------");
-                System.Console.WriteLine("RODADA DO JOGADOR");
-                System.Console.WriteLine("----------------------");
-
-
-                System.Console.WriteLine("Precione ENTER para rolar o dado");
-                Console.ReadKey();
-
-                int resultadoJogador = RandomNumberGenerator.GetInt32(1, 7);
-
-                System.Console.WriteLine($"O número sorteado foi {resultadoJogador}");
-
-                posicaoJogador += resultadoJogador;
-
-                System.Console.WriteLine($"Voce esta na posição {posicaoJogador} de {limiteLinhaDeChegada}");
-
-                if (posicaoJogador == 5 || posicaoJogador == 10 || posicaoJogador == 15 || posicaoJogador == 25)
+                ExibirCabecalho();
+                if (ehTurnoJogador)
                 {
 
-                    System.Console.WriteLine("\nCasa de Evento.Avance mais 3 posiçoes");
-                    posicaoJogador += bonusAvancoExtra;
-                }
-                else if (posicaoJogador == 7 || posicaoJogador == 13 || posicaoJogador == 20)
-                {
-                    System.Console.WriteLine("\nCasa de Evento.Recue menos 3 posiçoes");
-                    posicaoJogador -= penalidadeRecuo;
-                }
-
-                if (posicaoJogador >= limiteLinhaDeChegada)
-                {
-                    System.Console.WriteLine("Parabéns, voce chegou na linha de chegada!!");
-                    System.Console.WriteLine();
+                    posicaoJogador = IniciarRodadaJogador(posicaoJogador, limiteLinhaDeChegada, bonusAvancoExtra, penalidadeRecuo);
+                    if (posicaoJogador >= limiteLinhaDeChegada)
+                    {
+                        System.Console.WriteLine("Parabéns, voce chegou na linha de chegada!!");
+                        System.Console.WriteLine();
+                        jogoEstaEmAndamento = false;
+                    }
                     System.Console.WriteLine("Pressione ENTER para continuar");
-                    Console.ReadLine();
-                    jogoEstaEmAndamento = false;
-                    continue;
-                    
+                    Console.ReadKey();
                 }
-
-                System.Console.WriteLine();
-                System.Console.WriteLine("Pressione ENTER para continuar");
-                Console.ReadLine();
-
-                Console.Clear();
-                System.Console.WriteLine("----------------------");
-                System.Console.WriteLine("RODADA DO COMPUTADOR");
-                System.Console.WriteLine("----------------------");
-
-                int resultadoComputador = RandomNumberGenerator.GetInt32(1, 7);
-
-                System.Console.WriteLine($"O número sorteado foi {resultadoComputador}");
-
-                posicaoComputador += resultadoComputador;
-            
-                System.Console.WriteLine($"Computador esta na posição {posicaoComputador} de {limiteLinhaDeChegada}");
-               
-
-                if (posicaoComputador == 5 || posicaoComputador == 10 || posicaoComputador == 15 || posicaoComputador == 25)
+                else
                 {
-
-                    System.Console.WriteLine("\nCasa de Evento.Avance mais 3 posiçoes");
-                    posicaoComputador += bonusAvancoExtra;
-                }
-                else if (posicaoComputador == 7 || posicaoComputador == 13 || posicaoComputador == 20)
-                {
-                    System.Console.WriteLine("\nCasa de Evento.Recue menos 3 posiçoes");
-                    posicaoComputador -= penalidadeRecuo;
-                }
-
-                 if (posicaoComputador >= limiteLinhaDeChegada)
-                {
-                    System.Console.WriteLine("Computador chegou na linha de chegada!!");
-                    System.Console.WriteLine();
+                    posicaoComputador = IniciarRodadaComputador(posicaoComputador, limiteLinhaDeChegada, bonusAvancoExtra, penalidadeRecuo);
+                    if (posicaoComputador >= limiteLinhaDeChegada)
+                    {
+                        System.Console.WriteLine("Computador chegou na linha de chegada!!");
+                        System.Console.WriteLine();
+                        jogoEstaEmAndamento = false;
+                    }
                     System.Console.WriteLine("Pressione ENTER para continuar");
-                    Console.ReadLine();
-                    jogoEstaEmAndamento = false;
-                    continue;
-                    
+                    Console.ReadKey();
                 }
-                System.Console.WriteLine();
-                System.Console.WriteLine("Pressione ENTER para continuar");
-                Console.ReadLine();
 
-                
-            }   
-
+                ehTurnoJogador = !ehTurnoJogador;
+            }
             System.Console.Write("Deseja continuar? (s/N): ");
             string? opcaoDesejaContinuar = Console.ReadLine()?.ToUpper();
+            if (opcaoDesejaContinuar != "S") break;
+        }
+        static void ExibirCabecalho()
+        {
 
-            if (opcaoDesejaContinuar != "S")
-                break;
+            System.Console.WriteLine("----------------------");
+            System.Console.WriteLine("JOGO DOS DADOS");
+            System.Console.WriteLine("----------------------");
+
+        }
+
+        static int IniciarRodadaJogador(int posicaoJogador, int limiteLinhaDeChegada, int bonusAvancoExtra, int penalidadeRecuo)
+        {
+            System.Console.WriteLine("----------------------");
+            System.Console.WriteLine("RODADA DO JOGADOR");
+            System.Console.WriteLine("----------------------");
+            System.Console.WriteLine("Precione ENTER para rolar o dado");
+            Console.ReadKey();
+
+            int resultadoJogador = RandomNumberGenerator.GetInt32(1, 7);
+
+            System.Console.WriteLine($"O número sorteado foi {resultadoJogador}");
+            posicaoJogador += resultadoJogador;
+
+            System.Console.WriteLine($"Voce esta na posição {posicaoJogador} de {limiteLinhaDeChegada}");
+
+            if (posicaoJogador == 5 || posicaoJogador == 10 || posicaoJogador == 15 || posicaoJogador == 25)
+            {
+                System.Console.WriteLine("\nCasa de Evento.Avance mais 3 posiçoes");
+                posicaoJogador += bonusAvancoExtra;
+            }
+            else if (posicaoJogador == 7 || posicaoJogador == 13 || posicaoJogador == 20)
+            {
+                System.Console.WriteLine("\nCasa de Evento.Recue menos 2 posiçoes");
+                posicaoJogador -= penalidadeRecuo;
+            }
+            return posicaoJogador;
+        }
+
+        static int IniciarRodadaComputador(int posicaoComputador, int limiteLinhaDeChegada, int bonusAvancoExtra, int penalidadeRecuo)
+        {
+            System.Console.WriteLine("----------------------");
+            System.Console.WriteLine("RODADA DO COMPUTADOR");
+            System.Console.WriteLine("----------------------");
+
+
+            int resultadoComputador = RandomNumberGenerator.GetInt32(1, 7);
+            System.Console.WriteLine($"O número sorteado foi {resultadoComputador}");
+
+            posicaoComputador += resultadoComputador;
+
+
+            System.Console.WriteLine($"Computador esta na posição {posicaoComputador} de {limiteLinhaDeChegada}");
+            if (posicaoComputador == 5 || posicaoComputador == 10 || posicaoComputador == 15 || posicaoComputador == 25)
+            {
+                System.Console.WriteLine("\nCasa de Evento.Avance mais 3 posiçoes");
+                posicaoComputador += bonusAvancoExtra;
+            }
+            else if (posicaoComputador == 7 || posicaoComputador == 13 || posicaoComputador == 20)
+            {
+                System.Console.WriteLine("\nCasa de Evento.Recue menos 2 posiçoes");
+                posicaoComputador -= penalidadeRecuo;
+            }
+            return posicaoComputador;
         }
     }
 }
-
