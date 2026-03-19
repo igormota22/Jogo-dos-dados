@@ -32,26 +32,20 @@ class Program
                 {
 
                     posicaoJogador = IniciarRodadaJogador(posicaoJogador, limiteLinhaDeChegada, bonusAvancoExtra, penalidadeRecuo);
-                    if (posicaoJogador >= limiteLinhaDeChegada)
-                    {
-                        System.Console.WriteLine("Parabéns, voce chegou na linha de chegada!!");
-                        System.Console.WriteLine();
-                        jogoEstaEmAndamento = false;
-                    }
                     System.Console.WriteLine("Pressione ENTER para continuar");
                     Console.ReadKey();
                 }
                 else
                 {
                     posicaoComputador = IniciarRodadaComputador(posicaoComputador, limiteLinhaDeChegada, bonusAvancoExtra, penalidadeRecuo);
-                    if (posicaoComputador >= limiteLinhaDeChegada)
-                    {
-                        System.Console.WriteLine("Computador chegou na linha de chegada!!");
-                        System.Console.WriteLine();
-                        jogoEstaEmAndamento = false;
-                    }
                     System.Console.WriteLine("Pressione ENTER para continuar");
                     Console.ReadKey();
+                }
+
+                int posicaoVencedor;
+                if (VerificarVencedor(posicaoJogador, posicaoComputador, limiteLinhaDeChegada, out posicaoVencedor))
+                {
+                    jogoEstaEmAndamento = false;
                 }
 
                 ehTurnoJogador = !ehTurnoJogador;
@@ -123,5 +117,24 @@ class Program
             }
             return posicaoComputador;
         }
+    }
+    static bool VerificarVencedor(int posicaoJogador, int posicaoComputador, int limiteLinhaDeChegada, out int posicaoVencedor)
+    {
+        if (posicaoJogador >= limiteLinhaDeChegada)
+        {
+            System.Console.WriteLine("Parabéns, voce chegou na linha de chegada!!");
+            System.Console.WriteLine();
+            posicaoVencedor = posicaoJogador;
+            return true;
+        }
+        else if (posicaoComputador >= limiteLinhaDeChegada)
+        {
+            System.Console.WriteLine("Computador chegou na linha de chegada!!");
+            System.Console.WriteLine();
+            posicaoVencedor = posicaoComputador;
+            return true;
+        }
+        posicaoVencedor = 0;
+        return false;
     }
 }
