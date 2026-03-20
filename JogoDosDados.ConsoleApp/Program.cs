@@ -88,6 +88,13 @@ class Program
                 System.Console.WriteLine("\nCasa de Evento.Recue menos 2 posiçoes");
                 posicaoJogador -= penalidadeRecuo;
             }
+
+            if(resultadoJogador == 6)
+            {
+               System.Console.WriteLine("\nCasa de evento.Rodada EXTRA!Pressione ENTER para jogar novamente");
+               Console.ReadKey();
+               posicaoJogador = IniciarRodadaJogador(posicaoJogador,limiteLinhaDeChegada,bonusAvancoExtra,penalidadeRecuo);
+            }
             return posicaoJogador;
         }
 
@@ -114,6 +121,12 @@ class Program
             {
                 System.Console.WriteLine("\nCasa de Evento.Recue menos 2 posiçoes");
                 posicaoComputador -= penalidadeRecuo;
+            }
+
+            if(resultadoComputador == 6)
+            {
+              System.Console.WriteLine("\nCasa de Evento.Computador ganhou rodada EXTRA!");
+              posicaoComputador = IniciarRodadaComputador(posicaoComputador,limiteLinhaDeChegada,bonusAvancoExtra,penalidadeRecuo);  
             }
             return posicaoComputador;
         }
