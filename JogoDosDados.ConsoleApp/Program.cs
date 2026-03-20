@@ -27,7 +27,6 @@ class Program
             while (jogoEstaEmAndamento)
             {
                 Console.Clear();
-                ExibirCabecalho();
                 if (ehTurnoJogador)
                 {
 
@@ -50,9 +49,8 @@ class Program
 
                 ehTurnoJogador = !ehTurnoJogador;
             }
-            System.Console.Write("Deseja continuar? (s/N): ");
-            string? opcaoDesejaContinuar = Console.ReadLine()?.ToUpper();
-            if (opcaoDesejaContinuar != "S") break;
+          
+            if (!JogadorDesejaContinuar()) break;
         }
         static void ExibirCabecalho()
         {
@@ -65,6 +63,7 @@ class Program
 
         static int IniciarRodadaJogador(int posicaoJogador, int limiteLinhaDeChegada, int bonusAvancoExtra, int penalidadeRecuo)
         {
+            ExibirCabecalho();
             System.Console.WriteLine("----------------------");
             System.Console.WriteLine("RODADA DO JOGADOR");
             System.Console.WriteLine("----------------------");
@@ -100,6 +99,7 @@ class Program
 
         static int IniciarRodadaComputador(int posicaoComputador, int limiteLinhaDeChegada, int bonusAvancoExtra, int penalidadeRecuo)
         {
+            ExibirCabecalho();
             System.Console.WriteLine("----------------------");
             System.Console.WriteLine("RODADA DO COMPUTADOR");
             System.Console.WriteLine("----------------------");
@@ -149,5 +149,17 @@ class Program
         }
         posicaoVencedor = 0;
         return false;
+    }
+
+    static bool JogadorDesejaContinuar()
+    {
+        System.Console.Write("Deseja continuar? (s/N): ");
+        string? opcaoDesejaContinuar = Console.ReadLine()?.ToUpper();
+
+        if(opcaoDesejaContinuar != "S")
+        {
+            return false;
+        }
+        return true;
     }
 }
