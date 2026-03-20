@@ -16,6 +16,20 @@ class Program
         const int bonusAvancoExtra = 3;
         const int penalidadeRecuo = 2;
 
+        ExecutarPartida(limiteLinhaDeChegada,bonusAvancoExtra,penalidadeRecuo);
+
+    }
+    static void ExibirCabecalho()
+    {
+
+        System.Console.WriteLine("----------------------");
+        System.Console.WriteLine("JOGO DOS DADOS");
+        System.Console.WriteLine("----------------------");
+
+    }
+
+    static void ExecutarPartida(int limiteLinhaDeChegada, int bonusAvancoExtra, int penalidadeRecuo)
+    {
         while (true)
         {
             bool ehTurnoJogador = true;
@@ -49,16 +63,8 @@ class Program
 
                 ehTurnoJogador = !ehTurnoJogador;
             }
-          
+
             if (!JogadorDesejaContinuar()) break;
-        }
-        static void ExibirCabecalho()
-        {
-
-            System.Console.WriteLine("----------------------");
-            System.Console.WriteLine("JOGO DOS DADOS");
-            System.Console.WriteLine("----------------------");
-
         }
 
         static int IniciarRodadaJogador(int posicaoJogador, int limiteLinhaDeChegada, int bonusAvancoExtra, int penalidadeRecuo)
@@ -88,11 +94,11 @@ class Program
                 posicaoJogador -= penalidadeRecuo;
             }
 
-            if(resultadoJogador == 6)
+            if (resultadoJogador == 6)
             {
-               System.Console.WriteLine("\nCasa de evento.Rodada EXTRA!Pressione ENTER para jogar novamente");
-               Console.ReadKey();
-               posicaoJogador = IniciarRodadaJogador(posicaoJogador,limiteLinhaDeChegada,bonusAvancoExtra,penalidadeRecuo);
+                System.Console.WriteLine("\nCasa de evento.Rodada EXTRA!Pressione ENTER para jogar novamente");
+                Console.ReadKey();
+                posicaoJogador = IniciarRodadaJogador(posicaoJogador, limiteLinhaDeChegada, bonusAvancoExtra, penalidadeRecuo);
             }
             return posicaoJogador;
         }
@@ -123,10 +129,10 @@ class Program
                 posicaoComputador -= penalidadeRecuo;
             }
 
-            if(resultadoComputador == 6)
+            if (resultadoComputador == 6)
             {
-              System.Console.WriteLine("\nCasa de Evento.Computador ganhou rodada EXTRA!");
-              posicaoComputador = IniciarRodadaComputador(posicaoComputador,limiteLinhaDeChegada,bonusAvancoExtra,penalidadeRecuo);  
+                System.Console.WriteLine("\nCasa de Evento.Computador ganhou rodada EXTRA!");
+                posicaoComputador = IniciarRodadaComputador(posicaoComputador, limiteLinhaDeChegada, bonusAvancoExtra, penalidadeRecuo);
             }
             return posicaoComputador;
         }
@@ -156,7 +162,7 @@ class Program
         System.Console.Write("Deseja continuar? (s/N): ");
         string? opcaoDesejaContinuar = Console.ReadLine()?.ToUpper();
 
-        if(opcaoDesejaContinuar != "S")
+        if (opcaoDesejaContinuar != "S")
         {
             return false;
         }
