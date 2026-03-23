@@ -17,14 +17,7 @@
         ExecutarPartida(limiteLinhaDeChegada, bonusAvancoExtra, penalidadeRecuo);
 
     }
-    static void ExibirCabecalho()
-    {
-
-        System.Console.WriteLine("----------------------");
-        System.Console.WriteLine("JOGO DOS DADOS");
-        System.Console.WriteLine("----------------------");
-
-    }
+  
 
 static void ExecutarPartida(int limiteLinhaDeChegada, int bonusAvancoExtra, int penalidadeRecuo)
 {
