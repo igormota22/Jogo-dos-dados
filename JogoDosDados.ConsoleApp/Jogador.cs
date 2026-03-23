@@ -2,25 +2,25 @@ using System.Security.Cryptography;
 
 static class Jogador
 {
-   static public int posicao = 0;
-   private const int limiteLinhaDeChegada = 30;
-   private const int bonusAvancoExtra = 3;
-   private const int penalidadeRecuo = 2;
+    static public int posicao = 0;
+    private const int limiteLinhaDeChegada = 30;
+    private const int bonusAvancoExtra = 3;
+    private const int penalidadeRecuo = 2;
 
     public static void IniciarRodada()
     {
-        
+
         ExibirCabecalho();
         System.Console.WriteLine("----------------------");
         System.Console.WriteLine("RODADA DO JOGADOR");
         System.Console.WriteLine("----------------------");
         System.Console.WriteLine("Precione ENTER para rolar o dado");
-        Console.ReadKey();
+        Console.ReadLine();
 
-        int resultadoJogador = RandomNumberGenerator.GetInt32(1, 7);
+        int resultado = RandomNumberGenerator.GetInt32(1, 7);
 
-        System.Console.WriteLine($"O número sorteado foi {resultadoJogador}");
-        posicao += resultadoJogador;
+        System.Console.WriteLine($"O número sorteado foi {resultado}");
+        posicao += resultado;
 
         System.Console.WriteLine($"Voce esta na posição {posicao} de {limiteLinhaDeChegada}");
 
@@ -35,19 +35,21 @@ static class Jogador
             posicao -= penalidadeRecuo;
         }
 
-        if (resultadoJogador == 6)
+        if (resultado == 6 && !Venceu())
         {
             System.Console.WriteLine("\nCasa de evento.Rodada EXTRA!Pressione ENTER para jogar novamente");
-            Console.ReadKey();
+            Console.ReadLine();
+            int novaposicao = posicao;
+            posicao = novaposicao;
             IniciarRodada();
         }
     }
 
-     public static bool Venceu()
-        {
-         return posicao >= limiteLinhaDeChegada;
-            
-        }
+    public static bool Venceu()
+    {
+        return posicao >= limiteLinhaDeChegada;
+
+    }
 
     private static void ExibirCabecalho()
     {

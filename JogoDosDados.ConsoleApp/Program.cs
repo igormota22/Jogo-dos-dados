@@ -26,45 +26,44 @@
 
     }
 
-    static void ExecutarPartida(int limiteLinhaDeChegada, int bonusAvancoExtra, int penalidadeRecuo)
+static void ExecutarPartida(int limiteLinhaDeChegada, int bonusAvancoExtra, int penalidadeRecuo)
+{
+    while (true)
     {
-        while (true)
+        bool ehTurnoJogador = true;
+        bool jogoEstaEmAndamento = true;
+        ConfigurarPartida();
+        while (jogoEstaEmAndamento)
         {
-            bool ehTurnoJogador = true;
-            bool jogoEstaEmAndamento = true;
-
-            ConfigurarPartida();
-
-            while (jogoEstaEmAndamento)
+            Console.Clear();
+            if (ehTurnoJogador)
             {
-                Console.Clear();
-                if (ehTurnoJogador)
-                {
-                    Jogador.IniciarRodada();
-                    System.Console.WriteLine("Pressione ENTER para continuar");
-                    Console.ReadKey();
-                }
-                else
-                {
-                    Computador.IniciarRodada();
-                    System.Console.WriteLine("Pressione ENTER para continuar");
-                    Console.ReadKey();
-                }
-
+                Jogador.IniciarRodada();
+                System.Console.WriteLine("Pressione ENTER para continuar");
+                Console.ReadLine();
                 if (Jogador.Venceu())
                 {
+                    System.Console.WriteLine("Jogador venceu!!");
                     jogoEstaEmAndamento = false;
                 }
-                else
-                {
-                    Computador.IniciarRodada();
-                }
-
-                ehTurnoJogador = !ehTurnoJogador;
+                ehTurnoJogador = false;
             }
-
-            if (!JogadorDesejaContinuar()) break;
+            else
+            {
+                Computador.IniciarRodada();
+                System.Console.WriteLine("Pressione ENTER para continuar");
+                Console.ReadLine();
+                if (Computador.Venceu())
+                {
+                    System.Console.WriteLine("Computador venceu!!");
+                    jogoEstaEmAndamento = false;
+                }
+                ehTurnoJogador = true;
+            }
         }
+        if (!JogadorDesejaContinuar()) break;
+    }
+}
 
         static void ConfigurarPartida()
         {
@@ -84,4 +83,3 @@
         }
 
     }
-}

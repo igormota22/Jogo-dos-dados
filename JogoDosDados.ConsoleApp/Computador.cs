@@ -14,10 +14,10 @@ static class Computador
         System.Console.WriteLine("----------------------");
 
 
-        int resultadoComputador = RandomNumberGenerator.GetInt32(1, 7);
-        System.Console.WriteLine($"O número sorteado foi {resultadoComputador}");
+        int resultado = RandomNumberGenerator.GetInt32(1, 7);
+        System.Console.WriteLine($"O número sorteado foi {resultado}");
 
-        posicao += resultadoComputador;
+        posicao += resultado;
 
 
         System.Console.WriteLine($"Computador esta na posição {posicao} de {limiteLinhaDeChegada}");
@@ -32,10 +32,13 @@ static class Computador
             posicao -= penalidadeRecuo;
         }
 
-        if (resultadoComputador == 6)
+        if (resultado == 6 && !Venceu())
         {
             System.Console.WriteLine("\nCasa de Evento.Computador ganhou rodada EXTRA!");
+            int novaposicao = posicao;
+            posicao = novaposicao;
             IniciarRodada();
+            
         }
 
     }
